@@ -1,0 +1,109 @@
+ Mini-project #3 - "Stop Watch/Timer Game"
+ 
+# 'Introduction to Interactive Programming in Python' Course
+# RICE University - coursera.org
+# by Joe Warren, John Greiner, Stephen Wong, Scott Rixner
+#
+# Student: Cielo Marte
+
+# template for "Stop Watch/Timer Game" mini-project
+# template for "Stopwatch: The Game"
+import simplegui
+
+# define global variables
+A=0
+B=0
+C=0
+D=0
+x=0
+#running=True
+a=0
+b=0
+running_clock=False
+# define helper function format that converts time 
+#in tenths of seconds into formatted string A:BC.D
+def format(x):
+    global A,B,C,D
+    if x==0:
+        A,B,C,D==0
+    else:
+        A=(x/10)/60
+        B=(((x/10)%60)/10)
+        C=(((x/10)%60)%10)
+        D=((x%60)%10)
+    
+    return (str(A) + ":" +str(B) + str(C) + "." + str(D))
+
+
+    
+# define event handlers for buttons; "Start", "Stop", "Reset"
+def start():
+    global running_clock
+    
+    if running_clock==False:
+        timer.start()
+        running_clock==True
+    
+    
+def stop():
+    global b,running_clock
+    #if running_clock==True:
+    timer.stop()
+    b+=1
+        #running_clock==False
+    
+def reset():
+    global a,x,running_clock
+    #if running_clock==True:
+        #timer.stop()
+    a=0
+    b=0
+    A=0
+    B=0
+    C=0
+    D=0
+    x=0
+        #running_clock=False
+    timer.start()
+
+    a=0
+    b=0
+    A=0
+    B=0
+    C=0
+    D=0
+    x=0
+    ## needs to reset timer and the counter handler
+
+# define event handler for timer with 0.1 sec interval
+def tick():
+    global x
+    x +=1
+
+def counter(a,b):
+    #global a,b,D
+    if D==0 and b!=0:
+        a+=1
+    return (str(a) + "/" +str(b))
+    
+        
+# define draw handler
+def draw(canvas):
+    canvas.draw_text(format(x), [120,150],30,'White','sans-serif')
+    canvas.draw_text(counter(a,b), [250,50],30, "White")
+# create frame
+#simplegui.create_frame(title,width,height)
+frame=simplegui.create_frame('My Timer',300,300)
+frame.add_button('START',start)
+frame.add_button('STOP',stop)
+frame.add_button('RESET',reset)
+frame.set_draw_handler(draw)
+
+# register event handlers
+timer=simplegui.create_timer(100,tick)
+# start frame
+frame.start()
+#timer.start()
+
+# Please remember to review the grading rubric
+
